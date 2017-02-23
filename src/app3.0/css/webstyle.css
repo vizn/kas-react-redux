@@ -1,0 +1,85 @@
+body, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, section, article, aside, header, footer, nav, dialog, figure, hgroup {
+	margin:0;
+	padding:0;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin:0;
+	padding:0;
+	font-size:100%;
+}
+ul, ol, li {
+	list-style:none;
+}
+em, i {
+	font-style:normal;
+}
+img {
+	border:0;
+}
+input, img {
+	vertical-align:middle;
+}
+a, a:active, a:focus, a:hover, a:link, a:visited {
+	display: block;
+	text-decoration:none;
+}
+.fix{position:fixed;z-index: 100;}
+.white{background-color: #FFFFFF; height: 30px; width: 100%;}
+.top_115{height:115px;}
+.top_80{height:80px;}
+.menus{width: 100%; position:fixed; z-index: 99}
+.menus ul {
+	height:35px;
+	overflow:hidden;
+}
+.menus ul li{
+	background-color: #666666;
+	color: #FFFFFF;
+	float:left;
+	width:33.33%;
+	text-align:center;
+	line-height:35px;
+}
+.menus ul .hover {
+	background-color: #FFFFFF;
+	color:#333333;
+}
+.top{height:80px; width: 100%; background-color: #333333; text-align: center;}
+.top_life{margin-top:10px; height: 60px; width:29%; vertical-align:middle; float: left; border-right-width: 1px; border-right-color: #999999; border-right-style:dashed;}
+.top_life_input{position:fixed;z-index: 101; top:0; left:0; width: 29%; height:60px; opacity:0;}
+.top_middle{margin-top:10px; height: 60px; width:35%; vertical-align:middle; float: left;}
+.top_right{margin-top:10px; height: 60px; width:35%; vertical-align:middle; float: left;}
+.top_name{color:#999999; font-size: 12px; height: 30px;}
+.top_msg{color:#FFFFFF;}
+.weui_cell_hd img{width:20px;margin-right:5px;display:block;}
+.weui_cell_hd span{width:100px;margin-right:5px;display:block;}
+.weui_cell_hd_color{color: #999999;}
+.weui_cell:before {left:0;}
+.page {background-color: #fbf9fe;}
+.weui_cell{background-color: #ffffff;}
+.weui_input {color: #999999;}
+.weui_select{color: #999999;}
+
+
+.imglist{width: 50px; height: 50px; text-align:center;font-size: 12px; }
+.imgadd{width:48px; height: 48px;}
+
+/*动画过渡*/
+html
+{
+position:relative;
+animation:mymove 1s forwards;
+-webkit-animation:mymove 1s forwards; /*Safari and Chrome*/
+}
+
+@keyframes mymove
+{
+from {right:-500px;}
+to {right:0;}
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+from {right:-500px;}
+to {right:0;}
+}
