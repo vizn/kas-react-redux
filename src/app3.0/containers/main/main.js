@@ -27,10 +27,10 @@ class Main extends React.Component{
     if(gap == 0){
       this.props.actions.getDetailData()
     }
-    if(el.scrollTop == 0){
-      this.props.actions.getLastId(0)
-      this.props.actions.getDetailData()
-    }
+    // if(el.scrollTop == 0){
+    //   this.props.actions.getLastId(0)
+    //   this.props.actions.getDetailData()
+    // }
   }
   render(){
     let {detailData} = this.props

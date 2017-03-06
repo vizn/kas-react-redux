@@ -339,12 +339,30 @@ export function updateDetail(){
             if(json.error_msg){
               SN.snalert(json.error_msg)
             }else {
-              dispatch(receiveContent(''))
-              dispatch(receiveMoney(''))
               if(json.update){
-                dispatch(push('/main'))
+                SN.snisok(
+                  '修改成功',
+                  ()=>{
+                    if(window.postMessage){
+                      window.postMessage("http://"+window.location.host+"/^KAS记账")
+                    }else{
+                      dispatch(push('/'))
+                    }
+                  }
+                )
               }else{
-                SN.snalert('添加成功')
+                SN.snconfirm('添加成功',
+                '返回列表', ()=>{
+                  if(window.postMessage){
+                    window.postMessage("http://"+window.location.host+"/^KAS记账")
+                  }else{
+                    dispatch(push('/'))
+                  }
+                },
+                '记一笔', ()=>{
+                    dispatch(receiveContent(''))
+                    dispatch(receiveMoney(''))
+                })
               }
             }
           }
