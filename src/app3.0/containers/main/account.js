@@ -14,7 +14,7 @@ class Account extends React.Component{
     this.props.categoryActions.getCategoryData('0')
   }
   render(){
-    let {categoryList} = this.props
+    let {categoryList, actions} = this.props
     return(
       <div>
           <div className="page slideIn cell">
@@ -23,12 +23,11 @@ class Account extends React.Component{
                 <Cell.AccountList data={categoryList.accountList} urlPath='/account/edit'/>
             </div>
           </div>
-
+          <Cell.Btn_extra name='<=>账户互转' url='/account/exchange' />
       </div>
     )
   }
 }
-// <Cell.Btn_extra name='<=>账户互转' url='/account/exchange' />
 function mapStateToProps(state) {
   return {
     categoryList: state.categoryList.toJS(),

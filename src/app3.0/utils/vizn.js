@@ -34,7 +34,11 @@ export default class Vizn {
   }
   //API接口完整地址
   apiPath(action){
-    var path="http://192.168.31.182:3000/";//路径
+    var path;
+    if(process.env.NODE_ENV == 'development')
+      path="http://192.168.31.182:3000/";//路径
+    if(process.env.NODE_ENV == 'production')
+      path = 'http://api.kas.vizn.cn/'
 
     return path + action;
   }
@@ -211,6 +215,8 @@ class Popbox extends Sntouch{
     this.effect = this.settings.effect || "pop";
     this.title = this.settings.title || "提示框";
     this.type = this.settings.type || "fullscreen";
+    this.cancelText = this.settings.cancelText || '取消';
+    this.submitText = this.settings.submitText || '确认';
     this.callback = this.settings.callback ||
         function () {
         };
@@ -231,12 +237,14 @@ class Popbox extends Sntouch{
       b.winH = document.documentElement.offsetHeight;
       var c = b.type == "fullscreen" ? '<div id="Touch_Popbox" class="touch-popbox touch-popbox-mask000"><div id="Pop_Cotent"></div></div>' : '<div id="Touch_Popbox" class="touch-inner-popbox hide"><div id="Pop_Cotent">${title}</div></div>';
       if (b.type == "confirm") {
-          c = '<div id="Touch_Popbox" class="touch-popbox"><div id="popinner"><div class="msg">${title}</div><div class="btn btn-sn-d"><a href="javascript:void()">取消</a></div><div class="btn btn-sn-b"><a id="popsubmit" href="javascript:void()">确定</a></div></div></div>'
+          c = '<div id="Touch_Popbox" class="touch-popbox"><div id="popinner"><div class="msg">${title}</div><div class="btn btn-sn-d"><a id="popcancel" href="javascript:void()">${cancelText}</a></div><div class="btn btn-sn-b"><a id="popsubmit" href="javascript:void()">${submitText}</a></div></div></div>'
       }
       if (b.type == "isok")
-          c = '<div id="Touch_Popbox" class="touch-popbox"><div id="popinner"><div class="msg">${title}</div><div class="btn-sn-d"><a id="popsubmit" href="javascript:void()">确定</a></div></div></div>'
+          c = '<div id="Touch_Popbox" class="touch-popbox"><div id="popinner"><div class="msg">${title}</div><div class="btn-sn-d"><a id="popsubmit" href="javascript:void()">${submitText}</a></div></div></div>'
       b.html = this.HTMLTemplate(c, {
-          title: b.title
+          title: b.title,
+          cancelText: b.cancelText,
+          submitText: b.submitText
       });
       this.systemComfirm();
       if (this.system) {
@@ -304,7 +312,7 @@ class Popbox extends Sntouch{
           if (b.submitCallback) {
               b.submitCallback()
           }
-      })
+      });
   }
   mini () {
       var b = this;
@@ -354,6 +362,16 @@ export class Dialog extends Sntouch{
   snconfirm(tit, fun) {
       this.htmlRemove();
       new Popbox({title: tit, type: "confirm", submitCallback: fun});
+  }
+  snconfirm(tit, cancelText, cancelCallback, submitText, submitCallback){
+    this.htmlRemove();
+    new Popbox({
+      title: tit,
+      type: "confirm",
+      cancelText: cancelText,
+      cancel: cancelCallback,
+      submitText: submitText,
+      submitCallback: submitCallback});
   }
   //对话框输出
   snisok(tit, fun) {

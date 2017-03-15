@@ -31,7 +31,14 @@ import {
   DETAIL_SUCCESS,
   ACCOUNT_LIST_SUCCESS,
   DETAIL_LAST_ID,
-  NAVITEMS_INIT
+  NAVITEMS_INIT,
+  EXCHANGE_ID,
+  EXCHANGE_FROMACID,
+  EXCHANGE_TOACID,
+  EXCHANGE_MONEY,
+  EXCHANGE_LISTDATA,
+  EXCHANGE_TOACCOUNTDATA,
+  EXCHANGE_FROMACCOUNTDATA
 } from '../constants'
 
 //手机验证码状态数据
@@ -273,6 +280,62 @@ const categoryDetail = createReducer( fromJS({
     })
   }
 })
+//账户互转数据
+const exchangeDate = createReducer(fromJS({
+  exchange:{
+    _id:'',
+    fromacid:'',
+    toacid:'',
+    money:'',
+  },
+  fromaccountData:[],
+  toaccountData:[],
+  listData:[]
+}),{
+  [EXCHANGE_ID]:(state, action) =>{
+    return state.merge({
+      exchange: fromJS(state.toJS().exchange).merge({
+        _id: action.val
+      })
+    })
+  },
+  [EXCHANGE_FROMACID]: (state, action) => {
+    return state.merge({
+      exchange: fromJS(state.toJS().exchange).merge({
+        fromacid: action.val
+      })
+    })
+  },
+  [EXCHANGE_TOACID]: (state, action) => {
+    return state.merge({
+      exchange: fromJS(state.toJS().exchange).merge({
+        toacid: action.val
+      })
+    })
+  },
+  [EXCHANGE_MONEY]: (state, action) => {
+    return state.merge({
+      exchange: fromJS(state.toJS().exchange).merge({
+        money: action.val
+      })
+    })
+  },
+  [EXCHANGE_FROMACCOUNTDATA]: (state, action) => {
+    return state.merge({
+      fromaccountData: action.data,
+    })
+  },
+  [EXCHANGE_TOACCOUNTDATA]: (state, action) => {
+    return state.merge({
+      toaccountData: action.data
+    })
+  },
+  [EXCHANGE_LISTDATA]: (state, action) => {
+    return state.merge({
+      listData: action.data
+    })
+  }
+})
 
 const rootReducer = combineReducers({
   captchaData,
@@ -284,6 +347,7 @@ const rootReducer = combineReducers({
   categoryDetail,
   detail,
   categoryList,
+  exchangeDate,
   routing: routerReducer
 })
 

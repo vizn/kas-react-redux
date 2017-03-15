@@ -13,7 +13,7 @@ class Category extends React.Component{
     this.componentDidMount = this.componentDidMount.bind(this)
     this.componentWillUnmount = this.componentWillUnmount.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
-    this.props.actions.clearDetailData()
+    this.props.actions.getTopInfo(this.props.topInfo.y, this.props.topInfo.m)
     this.props.actions.getCategoryDataChart()
   }
   //报表类别选择回调方法

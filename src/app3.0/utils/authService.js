@@ -35,6 +35,9 @@ export function redirectToLogin(nextState,replace) {
     replace('/login')
   }
 }
+export function redirectNextState(prevState) {
+  console.log(prevState)
+}
 export function initData(apiPath, token){
   return fetch(apiPath, {
           credentials: 'include',

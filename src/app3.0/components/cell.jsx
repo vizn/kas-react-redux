@@ -64,7 +64,7 @@ export class Btn_extra extends React.Component{
         return (
           <div>
           <div className="white"></div>
-          <div className="weui_extra_area white" onClick={this.handleClick}>
+          <div  style={{fontSize: '18px'}} className="weui_extra_area white" onClick={this.handleClick}>
               {this.props.name}
           </div>
           </div>
@@ -87,7 +87,7 @@ export class SelectOption extends React.Component{
     }else{
       let option = this.props.data.map(function(data){
         return(
-            <option value={data.classid}>{data.classname}</option>
+            <option value={data._id}>{data.name}</option>
         )
       })
       if(this.props.display == "ture"){
@@ -550,6 +550,69 @@ export class AccountList extends React.Component{
                   </div>
               </div>
               <Account title="" content=""/>
+        </div>
+      )
+    }else{
+      return(
+        <div className="weui_cells_title">暂无数据</div>
+      )
+    }
+  }
+}
+class Exchange extends React.Component{
+  constructor(props) {
+    super(props);
+  }
+  handleClick(){
+    this.props.onClick(this.props.value)
+  }
+  render(){
+    if(this.props.value){
+      return(
+        <div className="weui_cell" onClick={this.handleClick.bind(this)}>
+            <div className="weui_cell_hd" style={{position: 'relative', marginRight: '10px'}}>
+              <Icon size={15} color={this.props.value.fromacid.iconcolor}  name={this.props.value.fromacid.icon}/>
+            </div>
+            <div className="weui_cell_bd" style={{position: 'relative', marginRight: '10px'}}>
+                <p>{this.props.value.fromacid.name}</p>
+            </div>
+            <div className="weui_cell_bd" style={{position: 'relative', marginRight: '10px'}}>
+                <p>=></p>
+            </div>
+            <div className="weui_cell_hd" style={{position: 'relative', marginRight: '10px'}}>
+              <Icon size={15} color={this.props.value.toacid.iconcolor}  name={this.props.value.toacid.icon}/>
+            </div>
+            <div className="weui_cell_bd" style={{position: 'relative', marginRight: '10px'}}>
+                <p>{this.props.value.toacid.name}</p>
+            </div>
+            <div className="weui_cell_ft weui_cell_primary">{Number(this.props.value.money).toFixed(2)}</div>
+        </div>
+
+      )
+    }else {
+      return (<div></div>)
+    }
+  }
+}
+export class ExchangeList extends React.Component{
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick(value){
+    this.props.onClick(value)
+  }
+  render(){
+    let conNodes = this.props.data.map(function(con, index){
+      return(
+          <Exchange key={index} onClick={this.props.onClick} value={con}/>
+      )
+    }.bind(this));
+    if(this.props.data.length > 0){
+      return(
+        <div>
+              {conNodes}
+              <Exchange title="" content=""/>
         </div>
       )
     }else{

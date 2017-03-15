@@ -16,7 +16,7 @@ class Index extends React.Component{
     this.handlePayOrIncome = this.handlePayOrIncome.bind(this)
   }
   componentDidMount(){
-    if(this.props.params.type){
+    if(this.props.params.type in ['main', 'account', 'category']){
       this.props.actions.getNavInit(this.props.params.type)
     }
     //初始化用户数据
